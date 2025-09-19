@@ -1,0 +1,9 @@
+fastapi>=0.110
+uvicorn[standard]>=0.23
+python-multipart>=0.0.9
+pydantic>=2.0
+PyYAML>=6.0
+
+# Optional local model backends (install manually if desired):
+# transformers>=4.40
+# gpt4all>=2.8.0
