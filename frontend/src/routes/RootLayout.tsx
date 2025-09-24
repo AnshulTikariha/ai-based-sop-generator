@@ -1,14 +1,27 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useLocation } from 'react-router-dom'
 import DarkModeToggle from '../shared/DarkModeToggle'
 
 export default function RootLayout() {
+  const location = useLocation()
+  const isActive = (to: string) => (location.pathname === to || (to !== '/' && location.pathname.startsWith(to)))
   return (
     <div className="min-h-full flex flex-col bg-neutral-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
       <header className="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/" className="font-semibold">SOP Generator</Link>
           <div className="flex items-center gap-4">
-            <Link to="/" className="text-sm opacity-80 hover:opacity-100">Home</Link>
+            <Link
+              to="/"
+              className={`text-sm px-3 py-1 rounded transition-colors ${isActive('/') ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'opacity-80 hover:opacity-100 border border-transparent hover:border-slate-300 dark:hover:border-slate-700'}`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/docs"
+              className={`text-sm px-3 py-1 rounded transition-colors ${isActive('/docs') ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'opacity-80 hover:opacity-100 border border-transparent hover:border-slate-300 dark:hover:border-slate-700'}`}
+            >
+              API Docs
+            </Link>
             <DarkModeToggle />
           </div>
         </div>

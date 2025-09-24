@@ -132,3 +132,56 @@ def delete_sop(sop_id: str) -> bool:
         os.remove(md_path)
         removed = True
     return removed
+
+
+# ----------------------
+# API Docs persistence
+# ----------------------
+
+def _docs_dir(project_id: str) -> str:
+    return os.path.join(settings.PROJECTS_DIR, project_id, "docs")
+
+
+def save_docs_inputs(project_id: str, data: Dict[str, Any]) -> None:
+    path = os.path.join(_docs_dir(project_id), "inputs.json")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+
+def load_docs_inputs(project_id: str) -> Dict[str, Any] | None:
+    path = os.path.join(_docs_dir(project_id), "inputs.json")
+    if not os.path.isfile(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_docs_openapi(project_id: str, openapi: Dict[str, Any]) -> None:
+    path = os.path.join(_docs_dir(project_id), "openapi.json")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(openapi, f, indent=2)
+
+
+def load_docs_openapi(project_id: str) -> Dict[str, Any] | None:
+    path = os.path.join(_docs_dir(project_id), "openapi.json")
+    if not os.path.isfile(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_docs_markdown(project_id: str, md: str) -> None:
+    path = os.path.join(_docs_dir(project_id), "docs.md")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(md)
+
+
+def load_docs_markdown(project_id: str) -> str | None:
+    path = os.path.join(_docs_dir(project_id), "docs.md")
+    if not os.path.isfile(path):
+        return None
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()

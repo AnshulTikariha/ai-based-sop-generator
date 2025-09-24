@@ -6,6 +6,7 @@ import './index.css'
 import RootLayout from './routes/RootLayout'
 import Home from './routes/Home'
 import SOPView from './routes/SOPView'
+import Docs from './routes/Docs'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'sop/:id', element: <SOPView /> },
+      { path: 'docs', element: <Docs /> },
     ],
   },
 ])

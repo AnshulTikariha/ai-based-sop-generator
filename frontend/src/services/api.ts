@@ -41,5 +41,27 @@ export const api = {
     // Reuse backends endpoint to infer availability; we don't have a dedicated getter, so return last set via setBackend isn't persisted.
     // We'll just call setBackend('none') when user selects none.
     return this.backendsAvailable()
-  }
+  },
+  // Docs endpoints
+  async docsIngest(payload: { project_id: string; curls_text?: string; curls?: string[] }) {
+    return request<{ ok: boolean; endpoints: number }>(`/docs/ingest`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
+  },
+  async docsGenerate(payload: { project_id: string; project_name?: string; base_url?: string; ai_enabled?: boolean }) {
+    return request<{ ok: boolean; paths: number }>(`/docs/generate`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
+  },
+  async docsOpenapi(projectId: string) {
+    return request<any>(`/docs/openapi.json?project_id=${encodeURIComponent(projectId)}`)
+  },
+  async docsMarkdown(projectId: string) {
+    return request<string>(`/docs/markdown?project_id=${encodeURIComponent(projectId)}`)
+  },
+  async docsGenerateInline(payload: { curls_text?: string; curls?: string[]; base_url?: string; format?: 'sheet'|'default'|'vendor'; ai_enabled?: boolean }) {
+    return request<{ openapi: any; markdown: string }>(`/docs/generate-inline`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
+  },
+  async docsExport(payload: { curls_text?: string; curls?: string[]; base_url?: string; format?: 'sheet'|'default'|'vendor'; ai_enabled?: boolean; output: 'pdf'|'docx'|'md' }) {
+    const res = await fetch(`${BASE}/docs/export`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
+    if (!res.ok) throw new Error(await res.text())
+    const blob = await res.blob()
+    return blob
+  },
 }

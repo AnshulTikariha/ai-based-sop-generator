@@ -3,6 +3,8 @@ uvicorn[standard]>=0.23
 python-multipart>=0.0.9
 pydantic>=2.0
 PyYAML>=6.0
+reportlab>=4.0
+python-docx>=1.1.0
 
 # Optional local model backends (install manually if desired):
 # transformers>=4.40

@@ -31,3 +31,16 @@ class ListItem(BaseModel):
     id: str
     project_name: str
     modified_ts: float
+
+
+class DocsIngestRequest(BaseModel):
+    project_id: str
+    curls_text: Optional[str] = None  # single text with one or many cURL commands
+    curls: Optional[List[str]] = None  # array of individual curl commands
+
+
+class DocsGenerateRequest(BaseModel):
+    project_id: str
+    project_name: Optional[str] = None
+    base_url: Optional[str] = None
+    ai_enabled: bool = True
