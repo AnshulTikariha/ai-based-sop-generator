@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .config import settings
-from .routers.sop import router as sop_router
-from .routers.docs import router as docs_router
+from config import settings
+from routers.sop import router as sop_router
+from routers.docs import router as docs_router
 
 app = FastAPI(title="SOP Generator", version="0.1.0")
 

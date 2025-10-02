@@ -1,6 +1,6 @@
 from typing import Dict, Any, List, Optional
-from ..models.schemas import SOPSection, SOPDocument
-from ..config import settings
+from models.schemas import SOPSection, SOPDocument
+from config import settings
 import uuid
 
 

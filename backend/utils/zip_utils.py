@@ -1,7 +1,7 @@
 import os
 import zipfile
 from fastapi import UploadFile
-from ..config import settings
+from config import settings
 
 
 def save_and_extract_zip(file: UploadFile, project_id: str) -> None:

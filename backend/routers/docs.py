@@ -2,9 +2,9 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import PlainTextResponse, JSONResponse
 from fastapi.responses import FileResponse
 from typing import Dict, Any
-from ..models.schemas import DocsIngestRequest, DocsGenerateRequest
-from ..services import storage_service
-from ..services import docs_service
+from models.schemas import DocsIngestRequest, DocsGenerateRequest
+from services import storage_service
+from services import docs_service
 import os
 import tempfile
 

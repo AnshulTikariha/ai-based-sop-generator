@@ -1,8 +1,8 @@
 import json
 import os
 from typing import Optional, Dict, Any, List
-from ..config import settings
-from ..models.schemas import SOPDocument, SOPSection, ListItem
+from config import settings
+from models.schemas import SOPDocument, SOPSection, ListItem
 
 
 def get_project_dir(project_id: str) -> Optional[str]:

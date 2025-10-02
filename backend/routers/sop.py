@@ -2,9 +2,9 @@ from fastapi import APIRouter, UploadFile, File, HTTPException
 from fastapi.responses import PlainTextResponse
 import uuid
 from typing import Dict, Any
-from ..models.schemas import UploadResponse, GenerateRequest, SOPDocument, ListItem
-from ..services import storage_service, parsing_service, ai_service
-from ..utils.zip_utils import save_and_extract_zip
+from models.schemas import UploadResponse, GenerateRequest, SOPDocument, ListItem
+from services import storage_service, parsing_service, ai_service
+from utils.zip_utils import save_and_extract_zip
 
 router = APIRouter(prefix="/sop", tags=["sop"])
 
